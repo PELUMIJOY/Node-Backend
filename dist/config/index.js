@@ -7,11 +7,10 @@ exports.APP_SECRET = exports.userSubject = exports.FromAdminMail = exports.GMAIL
 const sequelize_1 = require("sequelize");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-exports.db = new sequelize_1.Sequelize(process.env.DB_NAME, process.env.DB_USER, '', {
-    dialect: 'postgres',
-    host: 'localhost',
-    logging: false,
-    port: Number(process.env.DB_PORT)
+exports.db = new sequelize_1.Sequelize(process.env.DB_CONNECT, {
+    database: "postgres",
+    dialect: "postgres",
+    logging: false
 });
 exports.GMAIL_USER = process.env.GMAIL_USER;
 exports.GMAIL_PASS = process.env.GMAIL_PASS;
