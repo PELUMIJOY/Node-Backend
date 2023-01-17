@@ -79,7 +79,7 @@ export const verifyUser = async(req:Request, res:Response) =>{
   try {
       const token =req.params.signature
       const decode = await verifySignature(token) as JwtPayload
-      // console.log(decode)
+      
 
       // check if useris register user
       const User= await UserInstance.findOne({ 
@@ -88,17 +88,17 @@ export const verifyUser = async(req:Request, res:Response) =>{
 
       const {otp} = req.body;
 
-      if(User.verified){
-        res.status(400).json({
-          Error: 'You are already verified'
-        })
-      }
-
       if(User.otp !== parseInt(otp)){
         res.status(400).json({
           Error: 'Wrong OTP'
         })
        
+      }
+
+      if(User.verified){
+        res.status(400).json({
+          Error: 'You are already verified'
+        })
       }
 
       if(User){

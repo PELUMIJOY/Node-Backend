@@ -50,23 +50,12 @@ const GenerateSignature = (payload) => __awaiter(void 0, void 0, void 0, functio
     return jsonwebtoken_1.default.sign(payload, config_1.APP_SECRET, { expiresIn: '1d' });
 });
 exports.GenerateSignature = GenerateSignature;
-// export const validatePassword= async (Password: string | Buffer) =>{
-//         const hash = await bcrypt.hash(Password, 10);
-//         // Store hash in the database
-//     }
-//      
-//     // compare password
-//    export  const comparePassword= async (Password: string | Buffer, hash: string)=> {
-//         const result = await bcrypt.compare(Password, hash);
-//         return result;
-//     }
-// validate password
 const validatePassword = (enteredPassword, savedPassword, salt) => __awaiter(void 0, void 0, void 0, function* () {
     return (yield (0, exports.GeneratePassword)(enteredPassword, salt)) === savedPassword;
 });
 exports.validatePassword = validatePassword;
 const GenerateOtp = () => {
-    const otp = Math.floor(1000 + Math.random() * 900000);
+    const otp = Math.floor(1000 + Math.random() * 9000000);
     const expiry = new Date();
     expiry.setTime(new Date().getTime() + 30 * 60 * 1000);
     return { otp, expiry };

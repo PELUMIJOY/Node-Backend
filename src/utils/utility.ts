@@ -23,7 +23,7 @@ export const loginSchema = Joi.object().keys({
     password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
     
   });
-  
+
   export const option = {
     abortearly: false,
     errors: {
@@ -43,25 +43,15 @@ export const GeneratePassword = async(password:string, salt:string) =>{
     return jwt.sign(payload, APP_SECRET, {expiresIn:'1d'})
  }
 
-// export const validatePassword= async (Password: string | Buffer) =>{
-//         const hash = await bcrypt.hash(Password, 10);
-//         // Store hash in the database
-//     }
-//      
-//     // compare password
-//    export  const comparePassword= async (Password: string | Buffer, hash: string)=> {
-//         const result = await bcrypt.compare(Password, hash);
-//         return result;
-//     }
 
-    // validate password
+
 export const validatePassword = async( enteredPassword:string,savedPassword:string, salt:string)=>{
     return await GeneratePassword(enteredPassword, salt)=== savedPassword
 }
 
 
  export const GenerateOtp = () => {
-    const otp = Math.floor(1000 + Math.random() * 900000);
+    const otp = Math.floor(1000 + Math.random() * 9000000);
     const expiry = new Date();
     expiry.setTime(new Date().getTime() + 30 * 60 * 1000);
     return { otp, expiry };

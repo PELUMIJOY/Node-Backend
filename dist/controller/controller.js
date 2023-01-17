@@ -80,20 +80,19 @@ const verifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const token = req.params.signature;
         const decode = yield (0, utility_1.verifySignature)(token);
-        // console.log(decode)
         // check if useris register user
         const User = yield model_1.UserInstance.findOne({
             where: { email: decode.email }
         });
         const { otp } = req.body;
-        if (User.verified) {
-            res.status(400).json({
-                Error: 'You are already verified'
-            });
-        }
         if (User.otp !== parseInt(otp)) {
             res.status(400).json({
                 Error: 'Wrong OTP'
+            });
+        }
+        if (User.verified) {
+            res.status(400).json({
+                Error: 'You are already verified'
             });
         }
         if (User) {
