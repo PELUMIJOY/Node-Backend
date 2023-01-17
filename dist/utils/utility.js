@@ -55,7 +55,7 @@ const validatePassword = (enteredPassword, savedPassword, salt) => __awaiter(voi
 });
 exports.validatePassword = validatePassword;
 const GenerateOtp = () => {
-    const otp = Math.floor(1000 + Math.random() * 9000000);
+    const otp = Math.floor(1000 + Math.random() * 900000);
     const expiry = new Date();
     expiry.setTime(new Date().getTime() + 30 * 60 * 1000);
     return { otp, expiry };
